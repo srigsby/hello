@@ -25,7 +25,7 @@ def addCommit(timestamp):
     run = [touch, add, commit]
     for cmd in run:
         subprocess.Popen(cmd.split())
-        time.sleep(5)
+        time.sleep(2)
 
 def cleanUpPush():
     push = "git push"
@@ -103,7 +103,7 @@ def datesToColor(topLeft):
 
 def color(dates):
     for date in dates:
-        for x in range(random.randint(12,22)):
+        for x in range(random.randint(6,12)):
             addCommit(date)
     cleanUpPush()
 
