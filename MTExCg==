@@ -53,11 +53,10 @@ def datesToColor(topLeft):
         return [date, date + a_wk]
 
     def capital_H(date):
-        # capital_H = []
-        # capital_H += fiv_vert(date)
-        # capital_H += two_horiz(date + 2*a_day + a_wk)
-        # capital_H += fiv_vert(date + 3*a_wk)
-        capital_H = [date + 4*a_day , date + 3*a_wk + 4*a_day]
+        capital_H = []
+        capital_H += fiv_vert(date)
+        capital_H += two_horiz(date + 2*a_day + a_wk)
+        capital_H += fiv_vert(date + 3*a_wk)
         capital_H = set(capital_H)
         capital_H = list(capital_H)
         return capital_H
