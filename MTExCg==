@@ -1,23 +1,70 @@
 #! /usr/bin/python3
 
-bashCommand = "touch TEST"
 import subprocess
 import random
-process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
-output, error = process.communicate()
-print(output)
+import datetime, time
+# bashCommand = "touch TEST"
+# process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
+# output, error = process.communicate()
+# print(output)
+
+def unix(yr, m, d):
+    d = datetime.date(yr, m, d)
+    unix_timestamp = int(time.mktime(d.timetuple()))
+    twelve_hrs = 12 * 60**2
+    return unix_timestamp + twelve_hrs
 
 def addCommit(timestamp):
     nonce = random.randrange(16**10)
     touch = "touch " + str(nonce)
     add = "git add ."
     # commit = "git commit --date={0} -0800".format(timestamp)
-    commit = 'git commit --date={0} -m {0}'.format(1486624966)
+    commit = 'git commit --date={0} -m {0}'.format(timestamp)
     push = "git push"
     run = [touch, add, commit, push]
     for cmd in run:
-        print(cmd)
         subprocess.Popen(cmd.split())
+        # if cmd in [commit, push]:
+        #     time.sleep(3)
 
 # for x in range(100):
-addCommit(1486624966)
+# addCommit(1486624966)
+
+def topLeft(today):
+    """ return ntopleft date in the github history bar """
+    """ example: Feb 16, 2016 """
+
+    return unix(2016, 2, 16)
+
+a_hr = 60**2
+a_day = 24 * a_hr
+a_wk = 7 * a_day
+
+def datesToColor(topLeft):
+    """ return list of dates (unix timestamps) that need colorin """
+    color = [topLeft]
+
+    def four_vert(date):
+        return [date, date + a_day, date + 2*a_day, date + 3*a_day]
+
+    def two_horiz(date):
+        return [date, date + a_wk]
+
+    def capital_H(date):
+        capital_H = []
+        capital_H += four_vert(date)
+        capital_H += two_horiz(date + 2*a_day)
+        capital_H += four_vert(date + 3*a_wk)
+        capital_H = set(capital_H)
+        capital_H = list(capital_H)
+        return capital_H
+
+
+    return capital_H(topLeft)
+
+def color(dates):
+    for date in dates:
+        for x in range(random.randint(2,22)):
+            addCommit(date)
+
+color(datesToColor(topLeft('today')))
