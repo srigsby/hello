@@ -43,16 +43,17 @@ a_wk = 7 * a_day
 def datesToColor(topLeft):
     """ return list of dates (unix timestamps) that need colorin """
     def fiv_vert(date):
-        return [date, date + a_day, date + 2*a_day, date + 3*a_day]
+        return [date, date + a_day, date + 2*a_day, date + 3*a_day, date + 4*a_day]
 
     def two_horiz(date):
         return [date, date + a_wk]
 
     def capital_H(date):
-        capital_H = []
-        capital_H += fiv_vert(date)
-        capital_H += two_horiz(date + 2*a_day + a_wk)
-        capital_H += fiv_vert(date + 3*a_wk)
+        # capital_H = []
+        # capital_H += fiv_vert(date)
+        # capital_H += two_horiz(date + 2*a_day + a_wk)
+        # capital_H += fiv_vert(date + 3*a_wk)
+        capital_H = [date + 4*a_day , date + 3*a_wk + 4*a_day]
         capital_H = set(capital_H)
         capital_H = list(capital_H)
         return capital_H
