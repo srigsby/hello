@@ -24,8 +24,8 @@ def addCommit(timestamp):
     run = [touch, add, commit, push]
     for cmd in run:
         subprocess.Popen(cmd.split())
-        # if cmd in [commit, push]:
-        #     time.sleep(3)
+        if cmd in [commit, push]:
+            time.sleep(3)
 
 # for x in range(100):
 # addCommit(1486624966)
