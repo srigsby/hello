@@ -96,7 +96,7 @@ def datesToColor(topLeft):
         capital_O = list(capital_O)
         return capital_O
 # capital_H(topLeft) + capital_E(topLeft) + capital_L(topLeft) +
-    dates =  capital_L(topLeft) #capital_L2(topLeft) +capital_O(topLeft)
+    dates =  capital_H(topLeft) #capital_L2(topLeft) +capital_O(topLeft)
 
     return dates
 
