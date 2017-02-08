@@ -22,10 +22,10 @@ def addCommit(timestamp):
     # commit = "git commit --date={0} -0800".format(timestamp)
     commit = 'git commit --date={0} -m {0}'.format(timestamp)
     # push = "git push"
-    run = [touch, add, commit, push]
+    run = [touch, add, commit]
     for cmd in run:
         subprocess.Popen(cmd.split())
-        if cmd in [commit, push]:
+        if cmd == commit:
             time.sleep(2)
 
 def cleanUpPush():
