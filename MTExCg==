@@ -13,7 +13,7 @@ def addCommit(timestamp):
     add = "git add ."
     # commit = "git commit --date={0} -0800".format(timestamp)
     commit = 'git commit --date={0} -m {0}'.format(1486624966)
-    push = "git push origin master"
+    push = "git push"
     run = [touch, add, commit, push]
     for cmd in run:
         print(cmd)
