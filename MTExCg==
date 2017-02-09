@@ -1,0 +1,23 @@
+#! /usr/bin/python3
+
+bashCommand = "touch TEST"
+import subprocess
+import random
+process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
+output, error = process.communicate()
+print(output)
+
+def addCommit(timestamp):
+    nonce = random.randrange(16**10)
+    touch = "touch " + str(nonce)
+    add = "git add ."
+    # commit = "git commit --date={0} -0800".format(timestamp)
+    commit = 'git commit --date=1486624966 -m none'
+    push = "git push origin master"
+    run = [touch, add, commit, push]
+    for cmd in run:
+        print(cmd)
+        subprocess.Popen(cmd.split())
+
+# for x in range(100):
+addCommit(1486624966)
