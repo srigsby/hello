@@ -32,11 +32,14 @@ def cleanUpPush():
     subprocess.Popen(push.split())
 
 
-def topLeft(today):
-    """ return ntopleft date in the github history bar """
-    """ example: Feb 16, 2016 """
-
-    return unix(2016, 2, 16)
+def topLeft():
+    """ return top left date (pixel) in the github history bar """
+    """ presupposition: top left date is the monday before the date we are currently in one year ago """
+    now = time.gmtime()
+    yr_ago = now.tm_year - 1
+    mo = now.tm_mon
+    day = now.tm_mday
+    return unix(yr_ago, mo, day)
 
 
 a_hr = 60**2
@@ -107,4 +110,4 @@ def color(dates):
             addCommit(date)
     cleanUpPush()
 
-color(datesToColor(topLeft('today')))
+color(datesToColor(topLeft()))
