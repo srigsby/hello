@@ -3,17 +3,6 @@
 import subprocess, random, time
 from datetime import datetime, timedelta
 
-# process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
-# output, error = process.communicate()
-# print(output)
-
-# def unix(yr, m, d):
-#     d = datetime.date(yr, m, d)
-#     unix_timestamp = int(time.mktime(d.timetuple()))
-#     twelve_hrs = 12 * 60**2
-#     return unix_timestamp + twelve_hrs
-
-
 def addCommit(timestamp, commit_msg=None):
     nonce = random.randrange(16**10)
     touch = "touch " + str(nonce)
@@ -22,16 +11,10 @@ def addCommit(timestamp, commit_msg=None):
         commit = 'git commit --date={0} -m {1}'.format(timestamp, commit_msg)
     else:
         commit = 'git commit --date={0} -m {0}'.format(timestamp)
-    # push = "git push"
     run = [touch, add, commit]
     for cmd in run:
         subprocess.Popen(cmd.split())
         time.sleep(2)
-
-def cleanUpPush():
-    push = "git push"
-    subprocess.Popen(push.split())
-
 
 def topLeft():
     """ return top left date (pixel) in the github history bar """
@@ -41,7 +24,6 @@ def topLeft():
     days_past_sunday = (day_of_the_week+1)%7
     go_back_time_delta = timedelta(days=days_past_sunday, weeks=52)
     top_left = now-go_back_time_delta
-    # return unix(top_left.year, top_left.month, top_left.day)
     return int(top_left.timestamp())
 
 a_hr = 60**2
@@ -112,12 +94,21 @@ def color(dates):
     for date in dates:
         for x in range(random.randint(12,22)):
             addCommit(date)
-    cleanUpPush()
 
 color(datesToColor(topLeft()))
 
-
-# cleanup temp files 
+# cleanup temp files and push commits to remote repo
 subprocess.run(['rm', '[1-9]*'])
 subprocess.run(['git', 'add', '-u'])
-addCommit(int(datetime.now().timestamp()))
+addCommit(int(datetime.now().timestamp()), 'hello')
+subprocess.run(['git', 'push'])
+
+
+
+# DANGER :: scratch paper below
+# def unix(yr, m, d):
+#     d = datetime.date(yr, m, d)
+#     unix_timestamp = int(time.mktime(d.timetuple()))
+#     twelve_hrs = 12 * 60**2
+#     return unix_timestamp + twelve_hrs
+# corresponding return on topLeft() -> return unix(top_left.year, top_left.month, top_left.day)
