@@ -7,11 +7,11 @@ from datetime import datetime, timedelta
 # output, error = process.communicate()
 # print(output)
 
-def unix(yr, m, d):
-    d = datetime.date(yr, m, d)
-    unix_timestamp = int(time.mktime(d.timetuple()))
-    twelve_hrs = 12 * 60**2
-    return unix_timestamp + twelve_hrs
+# def unix(yr, m, d):
+#     d = datetime.date(yr, m, d)
+#     unix_timestamp = int(time.mktime(d.timetuple()))
+#     twelve_hrs = 12 * 60**2
+#     return unix_timestamp + twelve_hrs
 
 
 def addCommit(timestamp):
@@ -39,8 +39,8 @@ def topLeft():
     days_past_sunday = (day_of_the_week+1)%7
     go_back_time_delta = timedelta(days=days_past_sunday, weeks=52)
     top_left = now-go_back_time_delta
-    return unix(top_left.year, top_left.month, top_left.day)
-
+    # return unix(top_left.year, top_left.month, top_left.day)
+    return int(top_left.timestamp())
 
 a_hr = 60**2
 a_day = 24 * a_hr
