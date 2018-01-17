@@ -1,9 +1,8 @@
 #! /usr/bin/python3
 
-import subprocess
-import random
-import datetime, time
-# bashCommand = "touch TEST"
+import subprocess, random, time
+from datetime import datetime, timedelta
+
 # process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
 # output, error = process.communicate()
 # print(output)
@@ -67,7 +66,7 @@ def datesToColor(topLeft):
     def capital_E(date):
         offset = date + 6*a_wk
         vert = fiv_vert(offset)
-        horiz = two_horiz(offset + a_wk) + two_horiz(offset + 2*a_day + a_wk) + 
+        horiz = two_horiz(offset + a_wk) + two_horiz(offset + 2*a_day + a_wk) + \
                 two_horiz(offset + 4*a_day + a_wk)
         capital_E = vert + horiz
         capital_E = set(capital_E)
@@ -101,7 +100,7 @@ def datesToColor(topLeft):
         capital_O = list(capital_O)
         return capital_O
 
-    dates =  capital_H(topLeft) + capital_E(topLeft) + capital_L(topLeft) + 
+    dates =  capital_H(topLeft) + capital_E(topLeft) + capital_L(topLeft) + \
                 capital_L2(topLeft) +capital_O(topLeft)
 
     return dates
