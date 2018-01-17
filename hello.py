@@ -34,12 +34,13 @@ def cleanUpPush():
 
 def topLeft():
     """ return top left date (pixel) in the github history bar """
-    """ presupposition: top left date is the monday before the date we are currently in one year ago """
-    now = time.gmtime()
-    yr_ago = now.tm_year - 1
-    mo = now.tm_mon
-    day = now.tm_mday
-    return unix(yr_ago, mo, day)
+    """ presupposition: top left date is the sunday 52 weeks back from now """
+    now = datetime.now()
+    day_of_the_week = now.weekday() # monday = 0, sunday = 6
+    days_past_sunday = (day_of_the_week+1)%7
+    go_back_time_delta = timedelta(days=days_past_sunday, weeks=52)
+    top_left = now-go_back_time_delta
+    return unix(top_left.year, top_left.month, top_left.day)
 
 
 a_hr = 60**2
@@ -66,7 +67,8 @@ def datesToColor(topLeft):
     def capital_E(date):
         offset = date + 6*a_wk
         vert = fiv_vert(offset)
-        horiz = two_horiz(offset + a_wk) + two_horiz(offset + 2*a_day + a_wk) + two_horiz(offset + 4*a_day + a_wk)
+        horiz = two_horiz(offset + a_wk) + two_horiz(offset + 2*a_day + a_wk) + 
+                two_horiz(offset + 4*a_day + a_wk)
         capital_E = vert + horiz
         capital_E = set(capital_E)
         capital_E = list(capital_E)
@@ -99,7 +101,8 @@ def datesToColor(topLeft):
         capital_O = list(capital_O)
         return capital_O
 
-    dates =  capital_H(topLeft) + capital_E(topLeft) + capital_L(topLeft) + capital_L2(topLeft) +capital_O(topLeft)
+    dates =  capital_H(topLeft) + capital_E(topLeft) + capital_L(topLeft) + 
+                capital_L2(topLeft) +capital_O(topLeft)
 
     return dates
 
