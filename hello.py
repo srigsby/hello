@@ -113,3 +113,9 @@ def color(dates):
     cleanUpPush()
 
 color(datesToColor(topLeft()))
+
+
+# cleanup temp files 
+subprocess.run(['rm', '[1-9]*'])
+subprocess.run(['git', 'add', '-u'])
+addCommit(int(datetime.now().timestamp()))
