@@ -14,12 +14,14 @@ from datetime import datetime, timedelta
 #     return unix_timestamp + twelve_hrs
 
 
-def addCommit(timestamp):
+def addCommit(timestamp, commit_msg=None):
     nonce = random.randrange(16**10)
     touch = "touch " + str(nonce)
     add = "git add ."
-    # commit = "git commit --date={0} -0800".format(timestamp)
-    commit = 'git commit --date={0} -m {0}'.format(timestamp)
+    if commit_msg != None:
+        commit = 'git commit --date={0} -m {1}'.format(timestamp, commit_msg)
+    else:
+        commit = 'git commit --date={0} -m {0}'.format(timestamp)
     # push = "git push"
     run = [touch, add, commit]
     for cmd in run:
