@@ -95,20 +95,10 @@ def color(dates):
         for x in range(random.randint(12,22)):
             addCommit(date)
 
-color(datesToColor(topLeft()))
-
-# cleanup temp files and push commits to remote repo
-subprocess.run(['rm', '[1-9]*'])
-subprocess.run(['git', 'add', '-u'])
-addCommit(int(datetime.now().timestamp()), 'hello')
-subprocess.run(['git', 'push'])
-
-
-
-# DANGER :: scratch paper below
-# def unix(yr, m, d):
-#     d = datetime.date(yr, m, d)
-#     unix_timestamp = int(time.mktime(d.timetuple()))
-#     twelve_hrs = 12 * 60**2
-#     return unix_timestamp + twelve_hrs
-# corresponding return on topLeft() -> return unix(top_left.year, top_left.month, top_left.day)
+if __name__ == "__main__":
+    color(datesToColor(topLeft()))
+    # cleanup temp files and push commits to remote repo
+    subprocess.run(['rm', '[1-9]*'])
+    subprocess.run(['git', 'add', '-u'])
+    addCommit(int(datetime.now().timestamp()), 'hello')
+    subprocess.run(['git', 'push'])

@@ -17,7 +17,7 @@ import hello
 #         time.sleep(2)
 
 
-subprocess.run(['rm', '[1-9]*'])
-subprocess.run(['git', 'add', '-u'])
-addCommit(int(datetime.now().timestamp()), 'hello')
-subprocess.run(['git', 'push'])
+hello.subprocess.run(['rm', '[1-9]*'])
+hello.subprocess.run(['git', 'add', '-u'])
+hello.addCommit(int(hello.datetime.now().timestamp()), 'hello')
+hello.subprocess.run(['git', 'push'])
